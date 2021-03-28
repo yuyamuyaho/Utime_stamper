@@ -1,0 +1,44 @@
+{
+    "manifest_version": 2,
+    "name": "UTimestamper",
+    "description": "Show popular comments over time",
+    "version": "1.0",
+   
+    "content_scripts": [
+      {
+        "matches": [
+          "https://www.youtube.com/watch?*"
+        ],
+        "js": ["content.js"]
+      }
+    ],
+    "background" : {
+     "scripts" : ["background.js"],
+     "persistent" : true
+    },
+
+    "browser_action": {
+      "default_icon": {
+        "16": "/images/get_started16.png",
+        "32": "/images/get_started32.png",
+        "48": "/images/get_started48.png",
+        "128": "/images/get_started128.png",
+        "main":"icon.png"
+      },
+      "default_title": "UTimestamper",
+      "default_popup": "popup.html"
+    },
+
+    "icons": {
+      "16": "/images/get_started16.png",
+      "32": "/images/get_started32.png",
+      "48": "/images/get_started48.png",
+      "128": "/images/get_started128.png"
+    },
+
+    "permissions": [
+      "activeTab",
+      "storage"
+    ]
+    
+  }
