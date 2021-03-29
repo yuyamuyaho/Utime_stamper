@@ -1,16 +1,17 @@
 $("#flexSwitchCheckDefault").change(function() {
     if(this.checked) 
     {
-        chrome.runtime.sendMessage({action: "START"}, function(response)
-        {
-
+        chrome.runtime.sendMessage({greeting: "START"},
+        function (response) {
+            console.log(response.farewell);
         });
     }
+    
     else
     {
-        chrome.runtime.sendMessage({action: "FINISH"}, function(response)
-        {
-
+        chrome.runtime.sendMessage({greeting: "FINISH"},
+        function (response) {
+            console.log(response.farewell);
         });
     }
 });
