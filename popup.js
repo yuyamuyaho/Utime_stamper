@@ -1,17 +1,16 @@
-$("#flexSwitchCheckDefault").change(function() {
-    if(this.checked) 
-    {
-        chrome.runtime.sendMessage({greeting: "START"},
-        function (response) {
-            console.log(response.farewell);
-        });
+let enabled = true;
+
+chrome.storage.local.get("enabled", (data) => {
+    enabled = data.enabled;
+    if (enabled) {
+        $("#flexSwitchCheckDefault").prop("checked", true);
     }
-    
-    else
-    {
-        chrome.runtime.sendMessage({greeting: "FINISH"},
-        function (response) {
-            console.log(response.farewell);
-        });
-    }
+});
+
+$("#flexSwitchCheckDefault").change(function () {
+    enabled = this.checked;
+    chrome.storage.local.set({ enabled: enabled });
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, { action: "TOGGLE" });
+    });
 });
